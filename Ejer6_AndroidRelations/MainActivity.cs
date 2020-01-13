@@ -1,5 +1,6 @@
 ﻿using System;
 using Android.App;
+using Android.Content;
 using Android.OS;
 using Android.Runtime;
 using Android.Support.Design.Widget;
@@ -23,6 +24,10 @@ namespace Ejer6_AndroidRelations
 
             FloatingActionButton fab = FindViewById<FloatingActionButton>(Resource.Id.fab);
             fab.Click += FabOnClick;
+
+            //Abrir Dialogo pasandole el valor del EditText
+            AbrirDialogoConTexto();
+
         }
 
         public override bool OnCreateOptionsMenu(IMenu menu)
@@ -47,6 +52,19 @@ namespace Ejer6_AndroidRelations
             View view = (View) sender;
             Snackbar.Make(view, "Replace with your own action", Snackbar.LengthLong)
                 .SetAction("Action", (Android.Views.View.IOnClickListener)null).Show();
+        }
+
+        private void AbrirDialogoConTexto()
+        {
+            Button miBotonDiag = FindViewById<Button>(Resource.Id.miBoton1);
+            EditText miCampoET = FindViewById<EditText>(Resource.Id.miCampo1);
+
+            miBotonDiag.Click += (o, e) =>
+            {
+                var result = miCampoET.Text.ToString();
+                Toast.MakeText(this, result, ToastLength.Short).Show();
+            };
+
         }
 	}
 }
